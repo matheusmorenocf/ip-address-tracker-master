@@ -4,8 +4,8 @@ const inputSearch = document.querySelector('#input-search');
 document.addEventListener('DOMContentLoaded', ipUser)
 
 buttonSearch.addEventListener('click', APIgeo);
-inputSearch.addEventListener('input', formatIP);
-
+//inputSearch.addEventListener('input', formatIP);
+//
 // Funcao para permitir somente numeros e pontos no input
 function formatIP(ev) {
   ev.preventDefault()
@@ -15,12 +15,12 @@ function formatIP(ev) {
 // Funçao para requisitar a API os dados do IP informado
 async function APIgeo(ev) {
   try {
-    const ip = inputSearch.value;
-    const response = await fetch (`https://geo.ipify.org/api/v2/country,city?apiKey=at_Oq9bOriVzmnmLqjrpYiNbXflfSmpZ&ipAddress=${ip}`).then(resp => resp.json());
+    const ip = /[^0-9\.]/g.test(inputSearch.value) ? `domain=${inputSearch.value}` : `ipAddress=${inputSearch.value}`;
+    const response = await fetch (`https://geo.ipify.org/api/v2/country,city?apiKey=at_Oq9bOriVzmnmLqjrpYiNbXflfSmpZ&${ip}`).then(resp => resp.json());
     console.log(response)
     updateOutput(response)
   } catch (error) {
-    alert(error)
+    alert('IP ou dominio inválido')
   }
 }
 
