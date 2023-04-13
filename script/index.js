@@ -48,7 +48,7 @@ function updateOutput(data) {
 
   createMapContainer()
   // Inserindo o mapa na tela com a https://leafletjs.com/
-  var map = L.map('map').setView([lat, lng], 18);
+  var map = L.map('map').setView([lat, lng], 12);
   var marker = L.marker([lat, lng]).addTo(map);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 25,
