@@ -11,7 +11,7 @@ Os usuários devem ser capazes de:
 - Ver o layout ideal para cada página, dependendo do tamanho da tela do seu dispositivo
 - Ver os estados de hover para todos os elementos interativos na página
 - Ver seu próprio endereço IP no mapa no carregamento inicial da página
-- Pesquisar qualquer endereço IP ou domínio e ver as informações-chave e a localização
+- Pesquisar qualquer endereço IP e ver as informações-chave e a localização
 
 ### Screenshot
 
