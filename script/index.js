@@ -1,13 +1,15 @@
-
-
 const buttonSearch = document.querySelector('#button-search');
 const inputSearch = document.querySelector('#input-search');
 
+buttonSearch.addEventListener('click', APIgeo);
+inputSearch.addEventListener('input', formatIP);
 
-buttonSearch.addEventListener('click', () => APIgeo());
+// Funcao para permitir somente numeros e pontos no input
+function formatIP() {
+  inputSearch.value = inputSearch.value.replace(/[^0-9.]/g, '')                            
+}
 
-
-
+// Funçao para requisitar a API os dados do IP informado
 async function APIgeo() {
   try {
     const ip = inputSearch.value;
@@ -16,9 +18,11 @@ async function APIgeo() {
     updateOutput(response)
   } catch (error) {
     console.log(error)
+    alert('Endereço de IP inválido')
   }
 }
 
+// Funcao para inserir os dados retornados pela API na tela
 function updateOutput(data) {
   const spanIP = document.querySelector('#result-ip')
   const spanLocation = document.querySelector('#result-location')
@@ -33,7 +37,7 @@ function updateOutput(data) {
   const lat = data.location.lat;
   const lng = data.location.lng;
   
-
+  // Inserindo o mapa na tela com a https://leafletjs.com/
   var map = L.map('map').setView([lat, lng], 18);
   var marker = L.marker([lat, lng]).addTo(map);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
