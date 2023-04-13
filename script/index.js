@@ -77,6 +77,7 @@ async function ipUser() {
     const ipAddress = data.ip;
     
     inputSearch.value = ipAddress
+    APIgeo()
   })
   .catch(error => {
     console.error('Erro ao obter o endereço IP:', error);
