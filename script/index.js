@@ -19,6 +19,7 @@ async function APIgeo(ev) {
     const response = await fetch (`https://geo.ipify.org/api/v2/country,city?apiKey=at_Oq9bOriVzmnmLqjrpYiNbXflfSmpZ&${ip}`).then(resp => resp.json());
     console.log(response)
     updateOutput(response)
+    inputSearch.value = ''
   } catch (error) {
     alert('IP ou dominio inválido')
   }
