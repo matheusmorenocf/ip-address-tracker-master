@@ -43,6 +43,10 @@ function updateOutput(data) {
   const lat = data.location.lat;
   const lng = data.location.lng;
   
+
+  clearMAP()
+
+  createMapContainer()
   // Inserindo o mapa na tela com a https://leafletjs.com/
   var map = L.map('map').setView([lat, lng], 18);
   var marker = L.marker([lat, lng]).addTo(map);
@@ -52,6 +56,19 @@ function updateOutput(data) {
 }).addTo(map);
 }
 
+function createMapContainer() {
+  const map =   document.createElement('div');
+  map.id = 'map';
+  document.querySelector('main').appendChild(map)
+}
+
+function clearMAP() {
+  const map = document.getElementById('map');
+  if(map) {
+    document.querySelector('main').removeChild(map)
+  }
+  
+}
 
 async function ipUser() {
   fetch('https://api.ipify.org?format=json')
