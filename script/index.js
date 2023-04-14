@@ -4,10 +4,19 @@ const inputSearch = document.querySelector('#input-search');
 document.addEventListener('DOMContentLoaded', ipUser)
 
 buttonSearch.addEventListener('click', APIgeo);
+
+inputSearch.addEventListener('keypress', (ev) => {
+  if (ev.key == 'Enter') {
+    APIgeo()
+  }
+})
+
+
 //inputSearch.addEventListener('input', formatIP);
 //
+
 // Funcao para permitir somente numeros e pontos no input
-function formatIP(ev) {
+function formatIP(ev) { //Funcao nao esta sendo usada pois esta aceitando dominios
   ev.preventDefault()
   inputSearch.value = inputSearch.value.replace(/[^0-9.]/g, '')                            
 }
