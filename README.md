@@ -4,7 +4,7 @@ Esta é uma solução para o [IP address tracker challenge on Frontend Mentor](h
 
 ### The challenge
 
-Para obter as localizações dos endereços IP, você usará a API de geolocalização de IP da IPify. Para gerar o mapa, recomendamos usar o LeafletJS.
+Para obter as localizações dos endereços IP, você usará a API de geolocalização de IP da IPify. Para gerar o mapa o LeafletJS.
 
 Os usuários devem ser capazes de:
 
