@@ -1,19 +1,25 @@
 const buttonSearch = document.querySelector('#button-search');
 const inputSearch = document.querySelector('#input-search');
 
-document.addEventListener('DOMContentLoaded', ipUser)
+// Verifica se o conteudo digitado no input é um IP
 
-buttonSearch.addEventListener('click', APIgeo);
+
+document.addEventListener('DOMContentLoaded', APIgeo)
+
+buttonSearch.addEventListener('click', (ev) => {
+  const ip = /[^0-9\.]/g.test(inputSearch.value) ? `domain=${inputSearch.value}` : `ipAddress=${inputSearch.value}`;
+  APIgeo(ip)
+});
 
 inputSearch.addEventListener('keypress', (ev) => {
+  const ip = /[^0-9\.]/g.test(inputSearch.value) ? `domain=${inputSearch.value}` : `ipAddress=${inputSearch.value}`;
   if (ev.key == 'Enter') {
-    APIgeo()
+    APIgeo(ip)
   }
 })
 
-
 //inputSearch.addEventListener('input', formatIP);
-//
+
 
 // Funcao para permitir somente numeros e pontos no input
 function formatIP(ev) { //Funcao nao esta sendo usada pois esta aceitando dominios
@@ -22,27 +28,13 @@ function formatIP(ev) { //Funcao nao esta sendo usada pois esta aceitando domini
 }
 
 // Funçao para requisitar a API os dados do IP informado
-async function APIgeo(ev) {
+async function APIgeo(ip) {
   try {
-    const ip = /[^0-9\.]/g.test(inputSearch.value) ? `domain=${inputSearch.value}` : `ipAddress=${inputSearch.value}`;
     const response = await fetch (`https://geo.ipify.org/api/v2/country,city?apiKey=at_Oq9bOriVzmnmLqjrpYiNbXflfSmpZ&${ip}`).then(resp => resp.json());
-    console.log(response)
     updateOutput(response)
     inputSearch.value = ''
   } catch (error) {
     alert('IP ou dominio inválido')
-  }
-}
-
-// Uma funçao para pegar o IP do usuario e iniciar a funçao para buscar os dados e o mapa
-async function ipUser() {
-  try {
-    const response = await fetch('https://api.ipify.org?format=json').then(response => response.json());
-    const ipAddress = response.ip;
-    inputSearch.value = ipAddress
-    APIgeo()
-  } catch (error) {
-    alert(error);
   }
 }
 
@@ -54,7 +46,7 @@ function updateOutput(data) {
   const spanISP = document.querySelector('#result-isp')
 
   spanIP.textContent = data.ip;
-  spanLocation.textContent = `${data.location.region}, ${data.location.country}`;
+  spanLocation.textContent = `${data.location.city}, ${data.location.region}, ${data.location.country}`;
   spanTimezone.textContent = `UTC ${data.location.timezone}`;
   spanISP.textContent = data.isp;
 
